@@ -9,9 +9,11 @@ app.use(express.static('public'))
 
 //import routes
 import userRouter from "./routes/auth.js"
+import blogRouter from "./routes/blog.js"
+
 
 app.use('/api/v1/users',userRouter)
-
+app.use('/api/v1/blogs',blogRouter);
 
 
 

@@ -43,16 +43,59 @@ This is a step-by-step log of my full-stack backend project to build a secure bl
 
 ---
 
-## 📌 Next Up (Day 5): Blog CRUD
+## ✅ Day 5: Blog Schema + Create & Read APIs
 
-- Create `Blog` model
-- Implement:
-  - POST `/api/blogs/create` – Create blog
-  - GET `/api/blogs/` – List all blogs
-  - GET `/api/blogs/:slug` – Get one blog
-  - PUT `/api/blogs/:id` – Update (auth only)
-  - DELETE `/api/blogs/:id` – Delete (auth only)
-- Add ownership checks & slugify titles
+### ✅ What I Completed:
+
+- Created `Blog` schema with fields: title, content, slug, author, tags, banner
+- Added pre-save hook to auto-generate slugs using `slugify`
+- Built `POST /api/blogs/create` route:
+  - Authenticated route to create a blog post
+  - Automatically assigns current user as the author
+  - Validates required fields (title, content)
+- Built `GET /api/blogs/` route:
+  - Publicly accessible
+  - Returns all blog posts, sorted by latest
+  - Populates author info (username, email, avatar)
+- Built `GET /api/blogs/:slug` route:
+  - Fetches a single blog post by slug
+  - Returns 404 if slug is invalid or not found
+
+### 🧪 All tested using Postman:
+
+- Blog creation with token → ✅
+- View all blogs without token → ✅
+- Fetch specific blog by slug → ✅
+
+> Date: 2025-07-14
+
+---
+
+## 📌 Upcoming Tasks (Future Days)
+
+### 🔄 Day 6: Blog Update & Delete APIs
+
+- PUT `/api/blogs/:id` – only by the blog's author
+- DELETE `/api/blogs/:id` – only by author or admin
+- Ownership check via `req.user._id === blog.author`
+
+### 🔍 Day 7: Filters, Search, Pagination (Optional Enhancements)
+
+- Filter by tag, author, or keyword
+- Search in title/content
+- Paginate blogs (`?page=1&limit=10`)
+
+### 🔐 Day 8: Role-Based Access Control (RBAC)
+
+- Add roles in `User` schema (`user`, `admin`)
+- Only admin can delete any post
+- Add `restrictTo()` middleware
+
+### 🧪 Day 9: Testing, Error Handling, Final Cleanup
+
+- Improve error messages
+- Add default catch route (404 not found)
+- Final test sweep via Postman
 
 ---
 
