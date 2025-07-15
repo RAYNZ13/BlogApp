@@ -71,33 +71,118 @@ This is a step-by-step log of my full-stack backend project to build a secure bl
 
 ---
 
-## 📌 Upcoming Tasks (Future Days)
+## ✅ Day 6: Blog Update & Delete APIs
 
-### 🔄 Day 6: Blog Update & Delete APIs
+### ✅ What I Completed:
 
-- PUT `/api/blogs/:id` – only by the blog's author
-- DELETE `/api/blogs/:id` – only by author or admin
-- Ownership check via `req.user._id === blog.author`
+- 🛠 Added `updateBlogPost()` controller:
+  - Allows authors to update title, content, tags, banner
+  - Protected by `verifyJWT`
+  - Checks if `req.user._id === blog.author`
+- 🔗 Route: `PUT /api/blogs/:id`
 
-### 🔍 Day 7: Filters, Search, Pagination (Optional Enhancements)
+- 🗑 Added `deleteBlogPost()` controller:
+  - Allows blog author to delete their own blog
+  - Checks ownership before deleting
+- 🔗 Route: `DELETE /api/blogs/:id`
 
-- Filter by tag, author, or keyword
-- Search in title/content
-- Paginate blogs (`?page=1&limit=10`)
+- ✅ Tested both using Postman
+- 🔒 Verified that only the author can update or delete
+
+> Date: 2025-07-15
+
+-## 📌 U-coming Tasks (Future Days)
+
+### 🔍 Day 7: Filters, Search, and Pagination
+
+### ✅ What I Completed:
+
+- 🔍 **Search Support**:
+
+  - Users can search blog posts by title or content using `?search=query`
+  - Uses MongoDB regex for case-insensitive partial match
+
+- 📚 **Pagination Support**:
+
+  - Supports `?page` and `?limit` query parameters
+  - Returns total blogs, current page, total pages
+
+- 🔖 **Filtering Support**:
+
+  - Filter blogs by tag: `?tag=nodejs`
+  - Filter by author ID: `?author=64f99a...`
+  - Combinations work: `?search=api&tag=backend&page=2`
+
+- ✅ Fully tested with Postman for all combinations
 
 ### 🔐 Day 8: Role-Based Access Control (RBAC)
 
-- Add roles in `User` schema (`user`, `admin`)
-- Only admin can delete any post
-- Add `restrictTo()` middleware
+### ✅ What I Completed:
 
-### 🧪 Day 9: Testing, Error Handling, Final Cleanup
+- 🧩 Added `role` field to `User` schema:
 
-- Improve error messages
-- Add default catch route (404 not found)
-- Final test sweep via Postman
+  - Default is `"user"`
+  - Supports `"admin"` for elevated privileges
+
+- 🔐 Created `restrictTo()` middleware:
+
+  - Checks if `req.user.role` is allowed
+  - Throws `403` if not
+
+- 🧠 Updated ownership check in `deleteBlogPost()`:
+
+  - Allows deletion if:
+    - User is the blog's author OR
+    - User has admin role
+
+- 🧪 Fully tested using Postman:
+  - User can't delete other's blog
+  - Admin can delete any blog
+  - Role manually toggled in DB via MongoDB Compass
+
+### 📦 Day 9: Error Handling, Defaults & Cleanup
+
+### ✅ What I Completed:
+
+- 🛑 Added global 404 handler:
+
+  - `app.all('*')` now returns proper not found message for unknown routes
+
+- 🧼 Centralized error middleware:
+
+  - All thrown errors (`ApiError`) now return clean, consistent responses
+  - `stack` shown only in development mode
+
+- 📦 Reviewed and cleaned:
+
+  - Consistent HTTP status codes (`200`, `201`, `400`, `401`, `403`, `404`, `500`)
+  - Final controller structure and folders (routes, utils, models, middleware)
+
+- 🧪 Final test sweep (Postman):
+  - Auth, register, login
+  - JWT verification
+  - Create, read, update, delete blog
+  - Role-based delete control
+  - Pagination, search, filtering
+  - 404 + internal server errors
 
 ---
+
+## 🎉 Project Status: **MVP Complete ✅**
+
+### 👨‍💻 Backend Features:
+
+- Express.js REST API
+- MongoDB with Mongoose ODM
+- JWT-based authentication
+- Middleware-driven access control
+- Role-based permissions (user/admin)
+- Blog creation, reading, updating, deletion
+- Tag/author filters, search, and pagination
+- Error handling, 404 fallback
+- Clean structure with modular files
+
+> Date: 2025-07-15
 
 ## 📚 Tech Stack
 

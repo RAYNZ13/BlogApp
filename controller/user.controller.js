@@ -7,7 +7,7 @@ import jwt from 'jsonwebtoken';
 
 
 const registerUSer = asyncHandler( async (req, res) => {
-    const {username, email, password} = req.body;
+    const {username, email, password, role} = req.body;
 
     //check all fields are there
     if([username, email, password].some((field) => field?.trim() === "")){
@@ -29,6 +29,7 @@ const registerUSer = asyncHandler( async (req, res) => {
             username: username.toLowerCase(),
             email: email,
             password: password,
+            role: role,
         });
 
         const createdUser = await User.findById(user._id).select("-password");
