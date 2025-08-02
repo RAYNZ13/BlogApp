@@ -1,4 +1,4 @@
-# 📝 BlogApp Backend API
+# 📝 DevLog Backend API
 
 A robust, secure, and scalable blogging platform backend built with **Node.js**, **Express**, and **MongoDB**. It features user authentication, role-based access control, blog management (CRUD), advanced querying (search, filters, pagination), and a modular code structure ready for production.
 
