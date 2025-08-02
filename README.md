@@ -72,7 +72,7 @@ npm install
 
 ### 3. Create `.env` file
 ```env
-PORT=5000
+PORT=your_port_no
 MONGODB_URI=your_mongo_db_connection_string
 JWT_SECRET=your_secret_key
 NODE_ENV=development
@@ -116,12 +116,6 @@ npm run dev   # for development
 |------|--------------|
 | `user` | Create, update, delete own blogs |
 | `admin` | Delete any blog, elevated privileges |
-
----
-
-## 📦 Postman Collection
-
-You can import the [Postman collection](#) _(add your link)_ to test the API easily.
 
 ---
 
